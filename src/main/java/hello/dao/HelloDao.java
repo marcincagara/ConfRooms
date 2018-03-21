@@ -1,9 +1,8 @@
 package hello.dao;
 
+import hello.model.ConfRoomModel;
 import org.springframework.data.repository.CrudRepository;
 
-import hello.model.PersonModel;
-
-public interface HelloDao extends CrudRepository<PersonModel, String> {
+public interface HelloDao extends CrudRepository<ConfRoomModel, Integer> {
 
 }
