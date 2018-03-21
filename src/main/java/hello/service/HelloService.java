@@ -3,7 +3,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import hello.dao.HelloDao;
 import hello.model.ConfRoomModel;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HelloService {
@@ -24,22 +27,25 @@ public class HelloService {
         return result;
     }*/
 
-    public ConfRoomModel getConfRoom(int id){
-       ConfRoomModel confRoomModel = helloDao.findById(id)
-            .orElse(null);
-
-       return confRoomModel;
-    }
-
+  @Transactional
     public List<ConfRoomModel> getAll(){
         List<ConfRoomModel> confRoomModel = (List<ConfRoomModel>) helloDao.findAll();
         System.out.println(confRoomModel.size());
         return confRoomModel;
     }
 
-    public ConfRoomModel test(Integer id){
-        ConfRoomModel confRoomModel = helloDao.findById(id)
-                .orElse(null);
-        return confRoomModel;
+    @Transactional
+    public void saveConfRoom(ConfRoomModel confRoomModel){
+        helloDao.save(confRoomModel);
+    }
+
+    @Transactional
+    public void deleteConfRoom(int id) {
+      helloDao.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<ConfRoomModel> getConfRoom(int id) {
+        return helloDao.findById(id);
     }
 }

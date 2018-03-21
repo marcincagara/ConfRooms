@@ -4,44 +4,53 @@ import hello.model.ConfRoomModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import hello.service.HelloService;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/conf")
 public class HelloController {
 
     @Autowired
     private HelloService helloService;
 
-
-    @RequestMapping("/{id}")
-    public ConfRoomModel getPerson(@PathVariable("id") Integer id) {
-        System.out.println(helloService.getConfRoom(id));
-        return helloService.getConfRoom(id);
-    }
-
-    @RequestMapping("/a")
-    public String d(Model  model){
-        System.out.println("saas");
-        return "aaa";
-    }
-
-    @RequestMapping("/b")
-    public List<ConfRoomModel> sa(){
-        return helloService.getAll();
-    }
     @GetMapping("/list")
     public String listCustomers(Model model){
         List<ConfRoomModel> customers = helloService.getAll();
         model.addAttribute("confRoomModel", customers);
 
-        return "aaa";
+        return "confRoomList";
+    }
+
+    @GetMapping("/saveConf")
+    public String showSaveConfRoom(Model model){
+        ConfRoomModel confRoomModel = new ConfRoomModel();
+        model.addAttribute("confRoom",confRoomModel);
+
+        return "save-confRoom";
+    }
+    @PostMapping("save")
+    public String saveConfRoom(@ModelAttribute("confRoom") ConfRoomModel confRoomModel){
+        helloService.saveConfRoom(confRoomModel);
+        return "redirect:/conf/list";
+    }
+
+    @GetMapping("/delete")
+    public String deleteConfRoom(@RequestParam("confRoomId") int id){
+
+        helloService.deleteConfRoom(id);
+        return "redirect:/conf/list";
+    }
+
+    @GetMapping("/update")
+    public String updateCOnfRoom(@RequestParam("confRoomId") int id, Model model){
+
+        Optional<ConfRoomModel> confRoomModel = helloService.getConfRoom(id);
+        model.addAttribute("confRoom",confRoomModel);
+        return "save-confRoom";
     }
 }
