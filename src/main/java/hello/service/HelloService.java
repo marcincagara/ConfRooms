@@ -1,11 +1,9 @@
 package hello.service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import hello.dao.HelloDao;
-import hello.dto.Person;
-import hello.model.PersonModel;
+import hello.model.ConfRoomModel;
+import java.util.List;
 
 @Service
 public class HelloService {
@@ -17,16 +15,31 @@ public class HelloService {
         this.helloDao = helloDao;
     }
 
-    public Person getPerson(String name) {
-        PersonModel person = helloDao.findById(name)
+  /*  public Person getPerson(String name) {
+        ConfRoomModel person = helloDao.findById(name)
                 .orElse(null);
-        if (person == null) {
-            person = new PersonModel();
-            person.setName(name);
-            helloDao.save(person);
-        }
+
 
         Person result = new Person(person.getName());
         return result;
+    }*/
+
+    public ConfRoomModel getConfRoom(int id){
+       ConfRoomModel confRoomModel = helloDao.findById(id)
+            .orElse(null);
+
+       return confRoomModel;
+    }
+
+    public List<ConfRoomModel> getAll(){
+        List<ConfRoomModel> confRoomModel = (List<ConfRoomModel>) helloDao.findAll();
+        System.out.println(confRoomModel.size());
+        return confRoomModel;
+    }
+
+    public ConfRoomModel test(Integer id){
+        ConfRoomModel confRoomModel = helloDao.findById(id)
+                .orElse(null);
+        return confRoomModel;
     }
 }
