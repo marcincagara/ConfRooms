@@ -18,7 +18,7 @@
     <div id="content">
 
 
-        <!-- put new button: Add customer -->
+        <!-- put new button: Add confRoom -->
         <input type="button" value="Add confRoom"
                 onclick="window.location.href='saveConf';return false;"
                     class="add-button">
@@ -70,6 +70,9 @@
 
 </div>
 <br><br>
+</div>
+<a href="${pageContext.request.contextPath}/conf/admin">Back to List</a>
 
+</div>
 </body>
 </html>
