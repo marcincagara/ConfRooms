@@ -1,15 +1,20 @@
 package hello.model;
 
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import javax.persistence.*;
+@Getter
+@Setter
+@ToString
 @Entity
-@Table(name = "customer")
 public class ConfRoomModel {
 
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Integer;
+    private int id;
 
     private int floor;
 
@@ -17,7 +22,7 @@ public class ConfRoomModel {
 
     private boolean hdmi;
 
-    private boolean skypeVC;
+    private boolean skypeVc;
 
     private boolean remotes;
 
@@ -27,65 +32,22 @@ public class ConfRoomModel {
 
     private boolean labels;
 
-    private String comments;*/
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "first_name")
-    //   @NotNull(message = "is required")
-    //   @Size(min = 1,message = "is required")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    private String email;
+    private String comments;
 
 
-    public ConfRoomModel(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
 
     public ConfRoomModel() {
     }
 
-    public int getId() {
-        return this.id;
+    public ConfRoomModel(int floor, String name, boolean hdmi, boolean skypeVc, boolean remotes, boolean lan, boolean instruction, boolean labels, String comments) {
+        this.floor = floor;
+        this.name = name;
+        this.hdmi = hdmi;
+        this.skypeVc = skypeVc;
+        this.remotes = remotes;
+        this.lan = lan;
+        this.instruction = instruction;
+        this.labels = labels;
+        this.comments = comments;
     }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-        public String toString() {
-            return "ConfRoomModel.ConfRoomModelBuilder(id=" + this.id + ", firstName=" + this.firstName + ", lastName=" + this.lastName + ", email=" + this.email + ")";
-        }
-    }
+}
