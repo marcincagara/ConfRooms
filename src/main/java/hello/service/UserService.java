@@ -12,39 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HelloService {
+public class UserService {
 
-   // private ConfRoomRepository confRoomRepository;
 
     @Autowired
     private UserRepository userRepository;
-
-    /*@Autowired
-    public HelloService(ConfRoomRepository confRoomRepository) {
-        this.confRoomRepository = confRoomRepository;
-    }*/
-
-  /*@Transactional
-    public List<ConfRoomModel> getAll(){
-        List<ConfRoomModel> confRoomModel = new ArrayList<>();
-                confRoomRepository.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
-        return confRoomModel;
-    }*/
-
-    /*@Transactional
-    public void saveConfRoom(ConfRoomModel confRoomModel){
-        confRoomRepository.save(confRoomModel);
-    }
-
-    @Transactional
-    public void deleteConfRoom(int id) {
-      confRoomRepository.deleteById(id);
-    }
-
-    @Transactional
-    public Optional<ConfRoomModel> getConfRoom(int id) {
-        return confRoomRepository.findById(id);
-    }*/
 
     @Transactional
     public void saveUser(User user) {

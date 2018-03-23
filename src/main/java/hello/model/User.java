@@ -1,29 +1,37 @@
 package hello.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
-@Entity
-public class UserAs { //dlaczego z samym User program sie wywala
+@NoArgsConstructor
+@Entity(name = "users")
+public class User {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
 
-    private String login;
+    private String userName;
+
     private String password;
 
-    public UserAs() {
-    }
+    private String email;
 
-    public UserAs(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
+    private int enabled;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="userOwner")
+    private List<UserRole> userRoles;
+
+
 }

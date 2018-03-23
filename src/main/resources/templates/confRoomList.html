@@ -1,5 +1,3 @@
-<%@ taglib prefix="th" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns:th="http://www.thymeleaf.org">>
 <head>
     <title>Title</title>
@@ -36,34 +34,16 @@
 
             </tr>
 
-            <th:bean id="confRoomModel" scope="request" type="java.util.List"/>
-            <th:each ="tempconfRoomModel" items="${confRoomModel}">
-                <c:url var="updateLink" value="/conf/update" >
-                    <c:param name="confRoomId" value="${tempconfRoomModel.id}" />
-
-                </c:url>
-                <c:url var="deleteLink" value="/conf/delete" >
-                    <c:param name="confRoomId" value="${tempconfRoomModel.id}" />
-
-                </c:url>
+            <th:block th:each="conf : ${confRoomModel}">
                 <tr>
-                    <td>${tempconfRoomModel.floor}</td>
-                    <td>${tempconfRoomModel.hdmi}</td>
-                    <td>${tempconfRoomModel.instruction}</td>
-                    <td>${tempconfRoomModel.labels}</td>
-                    <td>${tempconfRoomModel.lan}</td>
-                    <td>${tempconfRoomModel.name}</td>
-                    <td>${tempconfRoomModel.remotes}</td>
-                    <td>${tempconfRoomModel.skypeVc}</td>
-                    <td>${tempconfRoomModel.comments}</td>
+                    <td th:text="${conf.floor}">floor</td>
+                    <td th:text="${conf.name}">name</td>
+                    <td th:text="${conf.name}">hdmi</td>
+                    <td th:text="${conf.name}">skypeVc</td>
+                    <td th:text="${conf.name}">remotes</td>
 
-                    <td><a href = ${updateLink}>Update </a>
-                        /
-                        <a href = "${deleteLink}"
-                           onclick="if (!(confirm('Are you sure you want to delete this confRoom?'))) return false">Delete</a>
-                    </td>
                 </tr>
-            </th:each>
+            </th:block>
         </table>
 
     </div>

@@ -1,14 +1,15 @@
 package hello.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class ConfRoomModel {
 
@@ -34,20 +35,4 @@ public class ConfRoomModel {
 
     private String comments;
 
-
-
-    public ConfRoomModel() {
-    }
-
-    public ConfRoomModel(int floor, String name, boolean hdmi, boolean skypeVc, boolean remotes, boolean lan, boolean instruction, boolean labels, String comments) {
-        this.floor = floor;
-        this.name = name;
-        this.hdmi = hdmi;
-        this.skypeVc = skypeVc;
-        this.remotes = remotes;
-        this.lan = lan;
-        this.instruction = instruction;
-        this.labels = labels;
-        this.comments = comments;
-    }
 }

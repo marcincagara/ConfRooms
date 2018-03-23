@@ -1,44 +1,28 @@
-package domain;
+package hello.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="user_roles")
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name = "user_roles")
 public class UserRole {
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)    
-    @Column(name="user_role_id")
-	private Long userroleid;
-	
-	@Column(name="userid")
-	private Long userid;
-	
-	@Column(name="role")
-	private String role;	
 
-	public String getRole() {
-		return role;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_role_id")
+    private Long userroleId;
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    @Column
+    private String role;
 
-	public Long getUserid() {
-		return userid;
-	}
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "userRoles")
+    private User userOwner;
 
-	public void setUserid(Long userid) {
-		this.userid = userid;
-	}
 
-	public Long getUserroleid() {
-		return userroleid;
-	}
-
-	public void setUserroleid(Long userroleid) {
-		this.userroleid = userroleid;
-	}	
-	
 }
