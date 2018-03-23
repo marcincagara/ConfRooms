@@ -1,9 +1,9 @@
 package hello.service;
-import hello.model.UserAs;
+import hello.model.User;
 import hello.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import hello.repository.HelloDao;
+import hello.repository.ConfRoomRepository;
 import hello.model.ConfRoomModel;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,55 +14,47 @@ import java.util.Optional;
 @Service
 public class HelloService {
 
-    private HelloDao helloDao;
+   // private ConfRoomRepository confRoomRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    public HelloService(HelloDao helloDao) {
-        this.helloDao = helloDao;
-    }
-
-  /*  public Person getPerson(String name) {
-        ConfRoomModel person = helloDao.findById(name)
-                .orElse(null);
-
-
-        Person result = new Person(person.getName());
-        return result;
+    /*@Autowired
+    public HelloService(ConfRoomRepository confRoomRepository) {
+        this.confRoomRepository = confRoomRepository;
     }*/
 
-  @Transactional
+  /*@Transactional
     public List<ConfRoomModel> getAll(){
         List<ConfRoomModel> confRoomModel = new ArrayList<>();
-                helloDao.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
+                confRoomRepository.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
         return confRoomModel;
-    }
+    }*/
 
-    @Transactional
+    /*@Transactional
     public void saveConfRoom(ConfRoomModel confRoomModel){
-        helloDao.save(confRoomModel);
+        confRoomRepository.save(confRoomModel);
     }
 
     @Transactional
     public void deleteConfRoom(int id) {
-      helloDao.deleteById(id);
+      confRoomRepository.deleteById(id);
     }
 
     @Transactional
     public Optional<ConfRoomModel> getConfRoom(int id) {
-        return helloDao.findById(id);
+        return confRoomRepository.findById(id);
+    }*/
+
+    @Transactional
+    public void saveUser(User user) {
+      userRepository.save(user);
     }
 
     @Transactional
-    public void saveUser(UserAs user) {
-      userRepository.save(user);
-    }
-    @Transactional
-    public List<UserAs> getUser() {
-      List<UserAs> users = new ArrayList<>();
-      userRepository.findAll().forEach(userAs -> users.add(userAs));
+    public List<User> getUser() {
+      List<User> users = new ArrayList<>();
+      userRepository.findAll().forEach(user -> users.add(user));
       return users;
     }
 
@@ -70,7 +62,7 @@ public class HelloService {
         userRepository.deleteById(id);
     }
 
-    public Optional<UserAs> getSingleUser(int id) {
+    public Optional<User> getSingleUser(int id) {
      return userRepository.findById(id);
     }
 }
