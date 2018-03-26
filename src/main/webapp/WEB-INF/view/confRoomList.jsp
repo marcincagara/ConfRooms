@@ -1,11 +1,11 @@
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">>
 <head>
     <title>Title</title>
     <link type="text/css"
           rel="stylesheet"
-          href=${pageContext.request.contextPath}/resources/css/style.css />
+          href=${pageContext.request.contextPath}/resources/static/css/style.css />
 </head>
 <body>
 
@@ -36,8 +36,8 @@
 
             </tr>
 
-            <jsp:useBean id="confRoomModel" scope="request" type="java.util.List"/>
-            <c:forEach var="tempconfRoomModel" items="${confRoomModel}">
+            <th:bean id="confRoomModel" scope="request" type="java.util.List"/>
+            <th:each ="tempconfRoomModel" items="${confRoomModel}">
                 <c:url var="updateLink" value="/conf/update" >
                     <c:param name="confRoomId" value="${tempconfRoomModel.id}" />
 
@@ -63,7 +63,7 @@
                            onclick="if (!(confirm('Are you sure you want to delete this confRoom?'))) return false">Delete</a>
                     </td>
                 </tr>
-            </c:forEach>
+            </th:each>
         </table>
 
     </div>

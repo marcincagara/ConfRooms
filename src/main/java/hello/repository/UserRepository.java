@@ -1,7 +1,8 @@
 package hello.repository;
 
-import hello.model.UserAs;
+import hello.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<UserAs, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
+    User findByUserName(String username);
 }

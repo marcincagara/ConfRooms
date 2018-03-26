@@ -1,13 +1,15 @@
 package hello.controller;
 
+import hello.dto.ConfRoom;
 import hello.model.ConfRoomModel;
-import hello.model.UserAs;
+import hello.model.User;
+import hello.service.ConfRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import hello.service.HelloService;
+import hello.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,10 @@ import java.util.Optional;
 public class AdminController {
 
     @Autowired
-    private HelloService helloService;
+    private UserService userService;
+
+    @Autowired
+    private ConfRoomService confRoomService;
 
     @GetMapping("/admin")
     public String adminPanel(){
@@ -36,8 +41,8 @@ public class AdminController {
 
     @GetMapping("/list")
     public String listCustomers(Model model){
-        List<ConfRoomModel> customers = helloService.getAll();
-        model.addAttribute("confRoomModel", customers);
+        List<ConfRoom> all = confRoomService.getAll();
+        model.addAttribute("confRoomModel", all);
         return "confRoomList";
     }
 
@@ -48,53 +53,53 @@ public class AdminController {
         return "save-confRoom";
     }
     @PostMapping("save")
-    public String saveConfRoom(@ModelAttribute("confRoom") ConfRoomModel confRoomModel){
-        helloService.saveConfRoom(confRoomModel);
+    public String saveConfRoom(@ModelAttribute("confRoom") ConfRoom confRoom){
+        confRoomService.saveConfRoom(confRoom);
         return "redirect:/conf/list";
     }
 
     @GetMapping("/delete")
     public String deleteConfRoom(@RequestParam("confRoomId") int id){
-        helloService.deleteConfRoom(id);
+        confRoomService.deleteConfRoom(id);
         return "redirect:/conf/list";
     }
 
     @GetMapping("/update")
     public String updateCOnfRoom(@RequestParam("confRoomId") int id, Model model){
-        Optional<ConfRoomModel> confRoomModel = helloService.getConfRoom(id);
-        model.addAttribute("confRoom",confRoomModel);
+        Optional<ConfRoom> confRoom = confRoomService.getConfRoom(id);
+        model.addAttribute("confRoom",confRoom);
         return "save-confRoom";
     }
 
     @GetMapping("/saveUser")
     public String showSaveUser(Model model){
-        UserAs user = new UserAs();
+        User user = new User();
         model.addAttribute("user",user);
         return "save-user";
     }
 
     @PostMapping("saveUser")
-    public String saveUser(@ModelAttribute("user") UserAs user){
-        helloService.saveUser(user);
+    public String saveUser(@ModelAttribute("user") User user){
+        userService.saveUser(user);
         return "redirect:/conf/showUser";
     }
 
     @GetMapping("/showUser")
     public String showUser(Model model){
-      List<UserAs> users = helloService.getUser();
+      List<User> users = userService.getUser();
       model.addAttribute("userList",users);
         return "user-list";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int id){
-        helloService.deleteUser(id);
+        userService.deleteUser(id);
         return "redirect:/conf/showUser";
     }
 
     @GetMapping("/updateUser")
     public String updateUser(@RequestParam("userId") int id, Model model){
-       Optional<UserAs> user =  helloService.getSingleUser(id);
+       Optional<User> user =  userService.getSingleUser(id);
        model.addAttribute("user",user);
         return "save-user";
     }
