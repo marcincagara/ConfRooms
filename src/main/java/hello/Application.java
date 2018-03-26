@@ -20,7 +20,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
+/*    @Bean
     public CommandLineRunner commandLineRunner(UserRepository userRepository, ConfRoomRepository confRoomRepository){
         return (String ... args)->{
             User  user = new User();
@@ -35,17 +35,22 @@ public class Application {
 
             user.setUserRoles(Arrays.asList(adminRole,userRole));
 
-
             userRepository.save(user);
 
-
-
-            //CONF room
-
-            ConfRoomModel confRoomModel = ConfRoomModel.builder().floor(1).name("Kraków").hdmi(true).skypeVc(true).lan(true).labels(true).remotes(true).instruction(true).comments("comment").build();
+            ConfRoomModel confRoomModel = ConfRoomModel.builder()
+                    .floor(1)
+                    .name("Kraków")
+                    .hdmi(true)
+                    .skypeVc(true)
+                    .lan(true)
+                    .labels(true)
+                    .remotes(true)
+                    .instruction(true)
+                    .comments("comment")
+                    .build();
 
             confRoomRepository.save(confRoomModel);
         };
-    }
+    }*/
 
 }

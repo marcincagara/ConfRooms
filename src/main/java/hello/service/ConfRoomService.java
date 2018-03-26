@@ -21,7 +21,26 @@ public class ConfRoomService {
         this.confRoomRepository = confRoomRepository;
     }
 
+
     @Transactional
+    public List<ConfRoomModel> getAllConfs(){
+        List<ConfRoomModel> confRoomModel = new ArrayList<>();
+        confRoomRepository.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
+        return confRoomModel;
+    }
+
+    @Transactional
+    public List<ConfRoomModel> getConfsFromFloor(int floor) {
+        List<ConfRoomModel> confRoomModel = new ArrayList<>();
+        for (ConfRoomModel roomModel : confRoomRepository.findAll()) {
+            if (roomModel.getFloor() == floor) {
+                confRoomModel.add(roomModel);
+            }
+        }
+        return confRoomModel;
+    }
+
+ /*   @Transactional
     public List<ConfRoom> getAll(){
         List<ConfRoom> confRooms = new ArrayList<>();
         Iterable<ConfRoomModel> all = confRoomRepository.findAll();
@@ -40,7 +59,7 @@ public class ConfRoomService {
             confRooms.add(confRoom);
         }
         return confRooms;
-    }
+    }*/
 
     @Transactional
     public void saveConfRoom(ConfRoom confRoom){
