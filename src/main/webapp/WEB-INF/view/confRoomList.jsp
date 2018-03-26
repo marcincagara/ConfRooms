@@ -1,4 +1,3 @@
-<%@ taglib prefix="th" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns:th="http://www.thymeleaf.org">>
 <head>
@@ -71,7 +70,7 @@
 </div>
 <br><br>
 </div>
-<a href="${pageContext.request.contextPath}/conf/admin">Back to List</a>
+<a href="${pageContext.request.contextPath}/conf/admin">Back to Home</a>
 
 </div>
 </body>

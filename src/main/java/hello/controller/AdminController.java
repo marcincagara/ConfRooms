@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import hello.service.UserService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/conf")
+@RequestMapping("/")
 public class AdminController {
 
     @Autowired
@@ -39,12 +40,28 @@ public class AdminController {
         return "user-panel";
     }
 
-    @GetMapping("/list")
-    public String listCustomers(Model model){
+
+    @GetMapping("/confRoomList")
+    public String listConfRooms(Model model){
+        List<ConfRoomModel> allConfs = confRoomService.getAllConfs();
+        allConfs.sort(Comparator.comparingInt(ConfRoomModel::getFloor));
+        model.addAttribute("confRoomModel", allConfs);
+        return "confRoomList";
+    }
+
+    @GetMapping("/confRoomList/{floor}")
+    public String listConfRoomsFromFloor(Model model, @PathVariable("floor") int floor){
+        List<ConfRoomModel> allConfs = confRoomService.getConfsFromFloor(floor);
+        model.addAttribute("confRoomModel", allConfs);
+        return "confRoomList";
+    }
+
+/*    @GetMapping("/confRoomlist")
+    public String listConfRooms(Model model){
         List<ConfRoom> all = confRoomService.getAll();
         model.addAttribute("confRoomModel", all);
         return "confRoomList";
-    }
+    }*/
 
     @GetMapping("/saveConf")
     public String showSaveConfRoom(Model model){
