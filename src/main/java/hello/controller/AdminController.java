@@ -1,23 +1,37 @@
 package hello.controller;
 
 import hello.model.ConfRoomModel;
-import hello.model.UserAs;
+import hello.model.User;
+import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import hello.service.HelloService;
+import hello.service.ConfRoomService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/conf")
+@RequestMapping("/")
 public class AdminController {
 
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder){
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        webDataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
+    }
+
     @Autowired
-    private HelloService helloService;
+    private ConfRoomService confRoomService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/admin")
     public String adminPanel(){
@@ -36,7 +50,7 @@ public class AdminController {
 
     @GetMapping("/list")
     public String listCustomers(Model model){
-        List<ConfRoomModel> customers = helloService.getAll();
+        List<ConfRoomModel> customers = confRoomService.getAll();
         model.addAttribute("confRoomModel", customers);
         return "confRoomList";
     }
@@ -49,52 +63,56 @@ public class AdminController {
     }
     @PostMapping("save")
     public String saveConfRoom(@ModelAttribute("confRoom") ConfRoomModel confRoomModel){
-        helloService.saveConfRoom(confRoomModel);
-        return "redirect:/conf/list";
+        confRoomService.saveConfRoom(confRoomModel);
+        return "redirect:/list";
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public String deleteConfRoom(@RequestParam("confRoomId") int id){
-        helloService.deleteConfRoom(id);
-        return "redirect:/conf/list";
+        confRoomService.deleteConfRoom(id);
+        return "redirect:/list";
     }
 
     @GetMapping("/update")
     public String updateCOnfRoom(@RequestParam("confRoomId") int id, Model model){
-        Optional<ConfRoomModel> confRoomModel = helloService.getConfRoom(id);
+        Optional<ConfRoomModel> confRoomModel = confRoomService.getConfRoom(id);
         model.addAttribute("confRoom",confRoomModel);
         return "save-confRoom";
     }
 
     @GetMapping("/saveUser")
     public String showSaveUser(Model model){
-        UserAs user = new UserAs();
+
+        User user = new User();
         model.addAttribute("user",user);
         return "save-user";
     }
 
-    @PostMapping("saveUser")
-    public String saveUser(@ModelAttribute("user") UserAs user){
-        helloService.saveUser(user);
-        return "redirect:/conf/showUser";
+    @PostMapping("/saveUser")
+    public String saveUser(@Valid@ModelAttribute("user") User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "save-user";
+        }
+        userService.saveUser(user);
+        return "redirect:/showUser";
     }
 
     @GetMapping("/showUser")
     public String showUser(Model model){
-      List<UserAs> users = helloService.getUser();
+      List<User> users = userService.getUser();
       model.addAttribute("userList",users);
         return "user-list";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int id){
-        helloService.deleteUser(id);
-        return "redirect:/conf/showUser";
+        userService.deleteUser(id);
+        return "redirect:/showUser";
     }
 
     @GetMapping("/updateUser")
     public String updateUser(@RequestParam("userId") int id, Model model){
-       Optional<UserAs> user =  helloService.getSingleUser(id);
+       Optional<User> user =  userService.getSingleUser(id);
        model.addAttribute("user",user);
         return "save-user";
     }

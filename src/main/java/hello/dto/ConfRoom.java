@@ -1,21 +1,13 @@
-package hello.model;
-
+package hello.dto;
 
 import lombok.*;
 
-import javax.persistence.*;
 @Getter
 @Setter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class ConfRoomModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class ConfRoom {
 
     private int floor;
 

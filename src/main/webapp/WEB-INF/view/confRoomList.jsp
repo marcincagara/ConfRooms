@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Title</title>
@@ -38,14 +39,6 @@
 
             <jsp:useBean id="confRoomModel" scope="request" type="java.util.List"/>
             <c:forEach var="tempconfRoomModel" items="${confRoomModel}">
-                <c:url var="updateLink" value="/conf/update" >
-                    <c:param name="confRoomId" value="${tempconfRoomModel.id}" />
-
-                </c:url>
-                <c:url var="deleteLink" value="/conf/delete" >
-                    <c:param name="confRoomId" value="${tempconfRoomModel.id}" />
-
-                </c:url>
                 <tr>
                     <td>${tempconfRoomModel.floor}</td>
                     <td>${tempconfRoomModel.hdmi}</td>
@@ -57,10 +50,13 @@
                     <td>${tempconfRoomModel.skypeVc}</td>
                     <td>${tempconfRoomModel.comments}</td>
 
-                    <td><a href = ${updateLink}>Update </a>
+                    <td><a href="/update?confRoomId=${tempconfRoomModel.id}" class="btn btn-danger">Update</a>
                         /
-                        <a href = "${deleteLink}"
-                           onclick="if (!(confirm('Are you sure you want to delete this confRoom?'))) return false">Delete</a>
+                        <form:form action="/delete?confRoomId=${tempconfRoomModel.id}"  method="DELETE">
+                            <button onclick="if (!(confirm('Are you sure you want to delete this confRoom?'))) return false" type="submit" class="btn btn-danger">DELETE</button>
+
+
+                        </form:form>
                     </td>
                 </tr>
             </c:forEach>
@@ -71,7 +67,7 @@
 </div>
 <br><br>
 </div>
-<a href="${pageContext.request.contextPath}/conf/admin">Back to List</a>
+<a href="${pageContext.request.contextPath}/admin">Back to List</a>
 
 </div>
 </body>

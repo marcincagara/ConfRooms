@@ -28,16 +28,16 @@
 
             <jsp:useBean id="userList" scope="request" type="java.util.List"/>
             <c:forEach var="tempUser" items="${userList}">
-                <c:url var="updateLink" value="/conf/updateUser" >
-                    <c:param name="userId" value="${tempUser.id}" />
+                <c:url var="updateLink" value="/updateUser" >
+                    <c:param name="userId" value="${tempUser.userId}" />
 
                 </c:url>
-                <c:url var="deleteLink" value="/conf/deleteUser" >
-                    <c:param name="userId" value="${tempUser.id}" />
+                <c:url var="deleteLink" value="/deleteUser" >
+                    <c:param name="userId" value="${tempUser.userId}" />
 
                 </c:url>
                 <tr>
-                    <td>${tempUser.login}</td>
+                    <td>${tempUser.userName}</td>
 
 
                     <td><a href = ${updateLink}>Update </a>
@@ -50,7 +50,7 @@
         </table>
 
     </div>
-    <a href="${pageContext.request.contextPath}/conf/admin">Back to List</a>
+    <a href="${pageContext.request.contextPath}/admin">Back to List</a>
 
 </div>
 <br><br>

@@ -1,3 +1,6 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: pawel
@@ -16,9 +19,13 @@
 <input type="button" value="Conf Room Panel"
        onclick="window.location.href='list';return false;"
        class="add-button">
+<security:authorize access="hasRole('ADMIN')">
 <input type="button" value="User Panel"
        onclick="window.location.href='showUser';return false;"
        class="add-button">
-
+</security:authorize>
+   <form:form action="${pageContext.request.contextPath}/logout" method="post">
+       <input type="submit" value="logout">
+   </form:form>
 </body>
 </html>
