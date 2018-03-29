@@ -21,7 +21,7 @@
 
         <!-- put new button: Add confRoom -->
         <input type="button" value="Add confRoom"
-                onclick="window.location.href='saveConf';return false;"
+                onclick="window.location.href='conf/saveConf';return false;"
                     class="add-button">
         <table>
             <tr>
@@ -50,9 +50,9 @@
                     <td>${tempconfRoomModel.skypeVc}</td>
                     <td>${tempconfRoomModel.comments}</td>
 
-                    <td><a href="/update?confRoomId=${tempconfRoomModel.id}" class="btn btn-danger">Update</a>
+                    <td><a href="/conf/update?confRoomId=${tempconfRoomModel.id}" class="btn btn-danger">Update</a>
                         /
-                        <form:form action="/delete?confRoomId=${tempconfRoomModel.id}"  method="DELETE">
+                        <form:form action="/conf/delete?confRoomId=${tempconfRoomModel.id}"  method="DELETE">
                             <button onclick="if (!(confirm('Are you sure you want to delete this confRoom?'))) return false" type="submit" class="btn btn-danger">DELETE</button>
 
 

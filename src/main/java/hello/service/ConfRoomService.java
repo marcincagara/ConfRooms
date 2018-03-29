@@ -21,17 +21,8 @@ public class ConfRoomService {
         this.confRoomRepository = confRoomRepository;
     }
 
-  /*  public ConfRoom getPerson(String name) {
-        ConfRoomModel person = confRoomRepository.findById(name)
-                .orElse(null);
-
-
-        ConfRoom result = new ConfRoom(person.getName());
-        return result;
-    }*/
-
-  @Transactional
-    public List<ConfRoomModel> getAll(){
+    @Transactional
+    public List<ConfRoomModel> getAllConfRooms(){
         List<ConfRoomModel> confRoomModel = new ArrayList<>();
                 confRoomRepository.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
         return confRoomModel;

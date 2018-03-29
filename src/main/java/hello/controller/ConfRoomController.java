@@ -15,13 +15,12 @@ import java.util.Optional;
 @RequestMapping("/conf")
 public class ConfRoomController {
 
-
     @Autowired
     private ConfRoomService confRoomService;
 
-    @GetMapping("/list")
+    @GetMapping("")
     public String listCustomers(Model model){
-        List<ConfRoomModel> customers = confRoomService.getAll();
+        List<ConfRoomModel> customers = confRoomService.getAllConfRooms();
         model.addAttribute("confRoomModel", customers);
         return "confRoomList";
     }
@@ -36,13 +35,13 @@ public class ConfRoomController {
     @PostMapping("save")
     public String saveConfRoom(@ModelAttribute("confRoom") ConfRoomModel confRoomModel){
         confRoomService.saveConfRoom(confRoomModel);
-        return "redirect:/list";
+        return "redirect:/conf";
     }
 
     @DeleteMapping("/delete")
     public String deleteConfRoom(@RequestParam("confRoomId") int id){
         confRoomService.deleteConfRoom(id);
-        return "redirect:/list";
+        return "redirect:/conf";
     }
 
     @GetMapping("/update")
@@ -51,5 +50,4 @@ public class ConfRoomController {
         model.addAttribute("confRoom",confRoomModel);
         return "save-confRoom";
     }
-
 }

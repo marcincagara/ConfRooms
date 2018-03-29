@@ -17,11 +17,11 @@
 </head>
 <body>
 <input type="button" value="Conf Room Panel"
-       onclick="window.location.href='list';return false;"
+       onclick="window.location.href='conf';return false;"
        class="add-button">
 <security:authorize access="hasRole('ADMIN')">
 <input type="button" value="User Panel"
-       onclick="window.location.href='showUser';return false;"
+       onclick="window.location.href='admin/showUser';return false;"
        class="add-button">
 </security:authorize>
    <form:form action="${pageContext.request.contextPath}/logout" method="post">

@@ -33,7 +33,7 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String adminPanel(){
         return "admin-panel";
     }
@@ -49,12 +49,11 @@ public class AdminController {
 
     @PostMapping("/saveUser")
     public String saveUser(@Valid@ModelAttribute("user") UserDto user, BindingResult bindingResult) {
-        System.out.println(">..............>>>>" + user);
         if(bindingResult.hasErrors()){
             return "save-user";
         }
         userService.saveUser(user);
-        return "redirect:/showUser";
+        return "redirect:/admin/showUser";
     }
 
     @GetMapping("/showUser")
@@ -79,7 +78,7 @@ public class AdminController {
     @DeleteMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int id){
         userService.deleteUser(id);
-        return "redirect:/showUser";
+        return "redirect:/admin/showUser";
     }
 
     @GetMapping("/updateUser")
