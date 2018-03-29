@@ -17,50 +17,41 @@ import java.util.Arrays;
 @SpringBootApplication
 public class Application {
 
-
-    /*  @Bean
-      public DriverManagerDataSource dataSource(){
-          DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-          driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-          driverManagerDataSource.setUrl("jdbc:postgresql://ec2-54-247-124-9.eu-west-1.compute.amazonaws.com:5432/df7stvvtr25t3i?sslmode=require");
-          driverManagerDataSource.setUsername("ypcfzaahcckamo");
-          driverManagerDataSource.setPassword("1b8a29b09cb5920eb4ae8049d867380e22e45f3a8153f845104e5289709fbd72");
-          return driverManagerDataSource;
-      }*/
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(UserRepository userRepository, ConfRoomRepository confRoomRepository) {
-        return (String... args) -> {
-            User user = new User();
-            user.setUserName("admin");
-            user.setPassword("admin");
-
-            UserRole adminRole = new UserRole();
-            adminRole.setRole("ROLE_ADMIN");
-
-            UserRole userRole = new UserRole();
-            userRole.setRole("ROLE_USER");
-
-            user.setUserRoles(Arrays.asList(adminRole, userRole));
-
-            userRepository.save(user);
-
-            ConfRoomModel confRoomModel = ConfRoomModel.builder()
-                    .floor(1)
-                    .name("Kraków")
-                    .hdmi(true)
-                    .skypeVc(true)
-                    .lan(true)
-                    .labels(true)
-                    .remotes(true)
-                    .instruction(true)
-                    .comments("comment")
-                    .build();
-
-            confRoomRepository.save(confRoomModel);
-        };
+//    @Bean
+//    public CommandLineRunner commandLineRunner(UserRepository userRepository, ConfRoomRepository confRoomRepository) {
+//        return (String... args) -> {
+//            User user = new User();
+//            user.setUserName("admin");
+//            user.setPassword("admin");
+//
+//            UserRole adminRole = new UserRole();
+//            adminRole.setRole("ROLE_ADMIN");
+//
+////            UserRole userRole = new UserRole();
+////            userRole.setRole("ROLE_USER");
+//
+//            //user.setUserRoles(Arrays.asList(adminRole, userRole));
+//            user.setUserRoles(Arrays.asList(adminRole));
+//
+//            userRepository.save(user);
+//
+//            ConfRoomModel confRoomModel = ConfRoomModel.builder()
+//                    .floor(1)
+//                    .name("Kraków")
+//                    .hdmi(true)
+//                    .skypeVc(true)
+//                    .lan(true)
+//                    .labels(true)
+//                    .remotes(true)
+//                    .instruction(true)
+//                    .comments("comment")
+//                    .build();
+//
+//            confRoomRepository.save(confRoomModel);
+//        };
     }
-}
+

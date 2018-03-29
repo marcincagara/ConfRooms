@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Title</title>
@@ -19,7 +20,9 @@
         <table>
             <tr>
                 <th>Login</th>
-
+                <th>Email</th>
+                <th>User Roles</th>
+                <th>Enabled</th>
             </tr>
             <!-- put new button: Add user -->
             <input type="button" value="Add user"
@@ -28,22 +31,19 @@
 
             <jsp:useBean id="userList" scope="request" type="java.util.List"/>
             <c:forEach var="tempUser" items="${userList}">
-                <c:url var="updateLink" value="/updateUser" >
-                    <c:param name="userId" value="${tempUser.userId}" />
 
-                </c:url>
-                <c:url var="deleteLink" value="/deleteUser" >
-                    <c:param name="userId" value="${tempUser.userId}" />
-
-                </c:url>
-                <tr>
+                              <tr>
                     <td>${tempUser.userName}</td>
-
-
-                    <td><a href = ${updateLink}>Update </a>
+                    <td>${tempUser.email}</td>
+                    <td>${tempUser.userRoles}</td>
+                    <td>${tempUser.enabled}</td>
+                    <td><a href="/updateUser?userId=${tempUser.userId}" class="btn btn-danger">Update</a>
                         /
-                        <a href = "${deleteLink}"
-                           onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false">Delete</a>
+
+                        <form:form action="/deleteUser?userId=${tempUser.userId}"  method="DELETE">
+                            <button onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false" type="submit" class="btn btn-danger">DELETE</button>
+
+                        </form:form>
                     </td>
                 </tr>
             </c:forEach>

@@ -34,6 +34,20 @@
             <tr>
                 <td><label>Password:</label></td>
                 <td><form:input path="password"/></td>
+                <form:errors path="password" cssClass="error"/>
+            </tr>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><form:input path="email"/></td>
+                <form:errors path="email" cssClass="error"/>
+            </tr>
+            <tr>
+                <td><label>User Roles:</label></td>
+                <td><form:input path="userRoles"/></td>
+            </tr>
+            <tr>
+                <td><label>enabled:</label></td>
+                <td><form:input path="enabled"/></td>
             </tr>
 
             <tr>
