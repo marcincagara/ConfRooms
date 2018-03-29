@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminController {
 
     @InitBinder
@@ -31,56 +31,11 @@ public class AdminController {
     }
 
     @Autowired
-    private ConfRoomService confRoomService;
-
-    @Autowired
     private UserService userService;
 
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String adminPanel(){
         return "admin-panel";
-    }
-
-    @GetMapping("/confRoomPanel")
-    public String confRoomPanel(){
-        return "conf-room-panel";
-    }
-
-    @GetMapping("/userPanel")
-    public String userPanel(){
-        return "user-panel";
-    }
-
-    @GetMapping("/list")
-    public String listCustomers(Model model){
-        List<ConfRoomModel> customers = confRoomService.getAll();
-        model.addAttribute("confRoomModel", customers);
-        return "confRoomList";
-    }
-
-    @GetMapping("/saveConf")
-    public String showSaveConfRoom(Model model){
-        ConfRoomModel confRoomModel = new ConfRoomModel();
-        model.addAttribute("confRoom",confRoomModel);
-        return "save-confRoom";
-    }
-    @PostMapping("save")
-    public String saveConfRoom(@ModelAttribute("confRoom") ConfRoomModel confRoomModel){
-        confRoomService.saveConfRoom(confRoomModel);
-        return "redirect:/list";
-    }
-
-    @DeleteMapping("/delete")
-    public String deleteConfRoom(@RequestParam("confRoomId") int id){
-        confRoomService.deleteConfRoom(id);
-        return "redirect:/list";
-    }
-
-    @GetMapping("/update")
-    public String updateCOnfRoom(@RequestParam("confRoomId") int id, Model model){
-        Optional<ConfRoomModel> confRoomModel = confRoomService.getConfRoom(id);
-        model.addAttribute("confRoom",confRoomModel);
-        return "save-confRoom";
     }
 
     @GetMapping("/saveUser")
@@ -98,7 +53,7 @@ public class AdminController {
         if(bindingResult.hasErrors()){
             return "save-user";
         }
-        userService.saveUser2(user);
+        userService.saveUser(user);
         return "redirect:/showUser";
     }
 
@@ -126,13 +81,6 @@ public class AdminController {
         userService.deleteUser(id);
         return "redirect:/showUser";
     }
-
-/*    @GetMapping("/updateUser")
-    public String updateUser(@RequestParam("userId") int id, Model model){
-       Optional<User> user =  userService.getSingleUser(id);
-       model.addAttribute("user",user);
-        return "save-user";
-    }*/
 
     @GetMapping("/updateUser")
     public String updateUser(@RequestParam("userId") int id, Model model){

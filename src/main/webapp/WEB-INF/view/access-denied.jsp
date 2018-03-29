@@ -15,6 +15,6 @@
 
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/conf/list">Back to Home page</a>
+<a href="${pageContext.request.contextPath}/saveConf">Back to Home page</a>
 </body>
 </html>

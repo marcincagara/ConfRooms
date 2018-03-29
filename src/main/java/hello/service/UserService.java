@@ -26,13 +26,9 @@ public class UserService {
 
     }
 
-    @Transactional
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
 
     @Transactional
-    public void saveUser2(UserDto userDto){
+    public void saveUser(UserDto userDto){
         User user = MapUserDto(userDto);
         userRepository.save(user);
     }
@@ -43,7 +39,6 @@ public class UserService {
         List<UserRole> userRoles = new ArrayList<>();
         userRoles.add(userRole);
         if(userDto.getUserId() == null) {
-            System.out.println("......." + userDto);
             User user = new User();
             user.setUserRoles(userRoles);
             user.setUserName(userDto.getUserName());

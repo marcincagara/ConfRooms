@@ -25,17 +25,6 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
         this.authenticationProvider = authenticationProvider;
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        //add our users for in memory authentication
-//
-//        User.UserBuilder users = User.withDefaultPasswordEncoder();
-//
-//        auth.inMemoryAuthentication()
-//                .withUser(users.username("john").password("test123").roles("EMPLOYEE"))
-//                .withUser(users.username("mary").password("test123").roles("ADMIN"));
-//    }
-
 @Autowired
 public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
     auth.authenticationProvider(authenticationProvider);
@@ -44,8 +33,10 @@ public void configAuthentication(AuthenticationManagerBuilder auth) throws Excep
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/conf/list")
-                .hasAnyRole("ADMIN","EMPLOYEE")
+                .antMatchers("/admin/**")
+                .hasAnyRole("ADMIN")
+                .antMatchers("/conf/**")
+                .hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

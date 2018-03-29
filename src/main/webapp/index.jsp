@@ -1,1 +1,1 @@
-<% response.sendRedirect("conf/list");%>
+<% response.sendRedirect("/");%>
