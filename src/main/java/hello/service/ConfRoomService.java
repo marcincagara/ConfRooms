@@ -45,4 +45,25 @@ public class ConfRoomService {
         return confRoomRepository.findById(id);
     }
 
+    @Transactional
+    public List<ConfRoomModel> getConfsByFloor(int floor) {
+        List<ConfRoomModel> confRoomModel = new ArrayList<>();
+        for (ConfRoomModel roomModel : confRoomRepository.findAll()) {
+            if (roomModel.getFloor() == floor) {
+                confRoomModel.add(roomModel);
+            }
+        }
+        return confRoomModel;
+    }
+
+    @Transactional
+    public List<ConfRoomModel> getConfsByName(String name) {
+        List<ConfRoomModel> confRoomModel = new ArrayList<>();
+        for (ConfRoomModel roomModel : confRoomRepository.findAll()) {
+            if (roomModel.getName().toLowerCase().equals(name.toLowerCase())) {
+                confRoomModel.add(roomModel);
+            }
+        }
+        return confRoomModel;
+    }
 }

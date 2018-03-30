@@ -25,6 +25,8 @@ public class ConfRoomController {
         return "confRoomList";
     }
 
+
+
     @GetMapping("/saveConf")
     public String addNewConfRoom(Model model){
         ConfRoomModel confRoomModel = new ConfRoomModel();
@@ -49,5 +51,19 @@ public class ConfRoomController {
         Optional<ConfRoomModel> confRoomModel = confRoomService.getConfRoom(id);
         model.addAttribute("confRoom",confRoomModel);
         return "save-confRoom";
+    }
+
+    @GetMapping("/confRoomListByFloor/")
+    public String listConfRoomsFromFloor(Model model, @RequestParam("floor") int floor){
+        List<ConfRoomModel> allConfs = confRoomService.getConfsByFloor(floor);
+        model.addAttribute("confRoomModel", allConfs);
+        return "confRoomList";
+    }
+
+    @GetMapping("/confRoomList/")
+    public String getConfRoomByName(Model model, @RequestParam("name") String name){
+        List<ConfRoomModel> allConfs = confRoomService.getConfsByName(name);
+        model.addAttribute("confRoomModel", allConfs);
+        return "confRoomList";
     }
 }

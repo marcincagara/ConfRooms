@@ -31,35 +31,35 @@
 
             </tr>
             <tr>
-                <td><label>Hdmi:</label></td>
-                <td><form:input path="hdmi"/></td>
-            </tr>
-            <tr>
-                <td><label>Instruction:</label></td>
-                <td><form:input path="instruction"/></td>
-            </tr>
-            <tr>
-                <td><label>labels:</label></td>
-                <td><form:input path="labels"/></td>
-            </tr>
-            <tr>
-                <td><label>lan:</label></td>
-                <td><form:input path="lan"/></td>
-            </tr>
-            <tr>
-                <td><label>name:</label></td>
+                <td><label>Name:</label></td>
                 <td><form:input path="name"/></td>
             </tr>
             <tr>
-                <td><label>remotes:</label></td>
-                <td><form:input path="remotes"/></td>
+                <td><label>SkypeVC:</label></td>
+                <td><form:checkbox path="skypeVc"/></td>
             </tr>
             <tr>
-                <td><label>skype_vc:</label></td>
-                <td><form:input path="skypeVc"/></td>
+                <td><label>HDMI:</label></td>
+                <td><form:checkbox path="hdmi"/></td>
             </tr>
             <tr>
-                <td><label>comments:</label></td>
+                <td><label>LAN:</label></td>
+                <td><form:checkbox path="lan"/></td>
+            </tr>
+            <tr>
+                <td><label>Labels:</label></td>
+                <td><form:checkbox path="labels"/></td>
+            </tr>
+            <tr>
+                <td><label>Remotes:</label></td>
+                <td><form:checkbox path="remotes"/></td>
+            </tr>
+            <tr>
+                <td><label>Instructions:</label></td>
+                <td><form:checkbox path="instruction"/></td>
+            </tr>
+            <tr>
+                <td><label>Comments:</label></td>
                 <td><form:input path="comments"/></td>
             </tr>
             <tr>
