@@ -21,12 +21,12 @@ public class ConfRoomService {
         this.confRoomRepository = confRoomRepository;
     }
 
-  /*  public ConfRoom getPerson(String name) {
+  /*  public ConfRoomDto getPerson(String name) {
         ConfRoomModel person = confRoomRepository.findById(name)
                 .orElse(null);
 
 
-        ConfRoom result = new ConfRoom(person.getName());
+        ConfRoomDto result = new ConfRoomDto(person.getName());
         return result;
     }*/
 
@@ -38,8 +38,9 @@ public class ConfRoomService {
     }
 
     @Transactional
-    public void saveConfRoom(ConfRoomModel confRoomModel){
+    public ConfRoomModel saveConfRoom(ConfRoomModel confRoomModel){
         confRoomRepository.save(confRoomModel);
+        return confRoomModel;
     }
 
     @Transactional

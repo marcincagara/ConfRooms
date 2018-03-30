@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConfRoom {
+public class ConfRoomDto {
 
     private int floor;
 
