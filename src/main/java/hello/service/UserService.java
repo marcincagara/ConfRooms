@@ -19,13 +19,11 @@ public class UserService {
 
     private UserRepository userRepository;
 
-
     @Autowired
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
 
     }
-
 
     @Transactional
     public void saveUser(UserDto userDto){
@@ -46,7 +44,6 @@ public class UserService {
             user.setEmail(userDto.getEmail());
             user.setEnabled(userDto.getEnabled());
             return user;
-
 
         } else {
             User user = findUser(userDto.getUserId());

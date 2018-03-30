@@ -1,9 +1,7 @@
 package hello.dto;
 
-import hello.model.UserRole;
 import lombok.*;
-import org.springframework.stereotype.Component;
-
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -16,7 +14,9 @@ import java.util.List;
 public class UserDto {
 
     private Integer userId;
+    @NotNull(message = "login can't be empty")
     private String userName;
+    @NotNull(message = "password can't be empty")
     private String password;
     private String email;
     private int enabled;

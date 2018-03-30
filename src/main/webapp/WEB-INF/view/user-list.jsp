@@ -37,10 +37,10 @@
                     <td>${tempUser.email}</td>
                     <td>${tempUser.userRoles}</td>
                     <td>${tempUser.enabled}</td>
-                    <td><a href="/updateUser?userId=${tempUser.userId}" class="btn btn-danger">Update</a>
+                    <td><a href="/admin/updateUser?userId=${tempUser.userId}" class="btn btn-danger">Update</a>
                         /
 
-                        <form:form action="/deleteUser?userId=${tempUser.userId}"  method="DELETE">
+                        <form:form action="/admin/deleteUser?userId=${tempUser.userId}"  method="DELETE">
                             <button onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false" type="submit" class="btn btn-danger">DELETE</button>
 
                         </form:form>
