@@ -48,7 +48,7 @@ public class ConfRoomController {
 
     @GetMapping("/update")
     public String updateCOnfRoom(@RequestParam("confRoomId") int id, Model model){
-        Optional<ConfRoomModel> confRoomModel = confRoomService.getConfRoom(id);
+        Optional<ConfRoomModel> confRoomModel = confRoomService.getConfRoomById(id);
         model.addAttribute("confRoom",confRoomModel);
         return "save-confRoom";
     }

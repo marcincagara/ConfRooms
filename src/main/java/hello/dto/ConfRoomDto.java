@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 public class ConfRoomDto {
 
+    private int id;
+
     private int floor;
 
     private String name;

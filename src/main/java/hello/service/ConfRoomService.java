@@ -1,6 +1,4 @@
 package hello.service;
-import hello.model.User;
-import hello.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import hello.repository.ConfRoomRepository;
@@ -41,7 +39,7 @@ public class ConfRoomService {
     }
 
     @Transactional
-    public Optional<ConfRoomModel> getConfRoom(int id) {
+    public Optional<ConfRoomModel> getConfRoomById(int id) {
         return confRoomRepository.findById(id);
     }
 
