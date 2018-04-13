@@ -49,7 +49,6 @@
                 <td><label>enabled:</label></td>
                 <td><form:input path="enabled"/></td>
             </tr>
-
             <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save"></td>
@@ -60,7 +59,7 @@
 
     <div style="clear: both;"></div>
     <p>
-        <a href="${pageContext.request.contextPath}/showUser">Back to List</a>
+        <a href="${pageContext.request.contextPath}/admin/showUser">Back to List</a>
     </p>
 </div>
 </body>

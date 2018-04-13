@@ -1,17 +1,14 @@
-package hello.security;
+package hello.authentication;
 
 import hello.model.User;
 import hello.model.UserRole;
 import hello.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -41,6 +38,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         List<SimpleGrantedAuthority> roles = getAllRoles(user);
         return new UsernamePasswordAuthenticationToken(name, password,
                 roles);
+
     }
 
     private List<SimpleGrantedAuthority> getAllRoles(User user) {
@@ -64,6 +62,4 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
-
-
 }
