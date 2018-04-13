@@ -1,10 +1,8 @@
 package hello.service;
-
-import hello.dto.ConfRoom;
-import hello.model.ConfRoomModel;
-import hello.repository.ConfRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import hello.repository.ConfRoomRepository;
+import hello.model.ConfRoomModel;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -23,14 +21,30 @@ public class ConfRoomService {
 
 
     @Transactional
-    public List<ConfRoomModel> getAllConfs(){
+    public List<ConfRoomModel> getAllConfRooms(){
         List<ConfRoomModel> confRoomModel = new ArrayList<>();
-        confRoomRepository.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
+                confRoomRepository.findAll().forEach(confRoomModel1 -> confRoomModel.add(confRoomModel1));
         return confRoomModel;
     }
 
     @Transactional
-    public List<ConfRoomModel> getConfsFromFloor(int floor) {
+    public ConfRoomModel saveConfRoom(ConfRoomModel confRoomModel){
+        confRoomRepository.save(confRoomModel);
+        return confRoomModel;
+    }
+
+    @Transactional
+    public void deleteConfRoom(int id) {
+      confRoomRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<ConfRoomModel> getConfRoomById(int id) {
+        return confRoomRepository.findById(id);
+    }
+
+    @Transactional
+    public List<ConfRoomModel> getConfsByFloor(int floor) {
         List<ConfRoomModel> confRoomModel = new ArrayList<>();
         for (ConfRoomModel roomModel : confRoomRepository.findAll()) {
             if (roomModel.getFloor() == floor) {
@@ -40,61 +54,14 @@ public class ConfRoomService {
         return confRoomModel;
     }
 
- /*   @Transactional
-    public List<ConfRoom> getAll(){
-        List<ConfRoom> confRooms = new ArrayList<>();
-        Iterable<ConfRoomModel> all = confRoomRepository.findAll();
-        for(ConfRoomModel confRoomModel : all){
-            ConfRoom confRoom =  ConfRoom.builder()
-                    .floor(confRoomModel.getFloor())
-                    .name(confRoomModel.getName())
-                    .hdmi(confRoomModel.isHdmi())
-                    .skypeVc(confRoomModel.isSkypeVc())
-                    .lan(confRoomModel.isLan())
-                    .labels(confRoomModel.isLabels())
-                    .remotes(confRoomModel.isRemotes())
-                    .instruction(confRoomModel.isInstruction())
-                    .comments(confRoomModel.getComments())
-                    .build();
-            confRooms.add(confRoom);
+    @Transactional
+    public List<ConfRoomModel> getConfsByName(String name) {
+        List<ConfRoomModel> confRoomModel = new ArrayList<>();
+        for (ConfRoomModel roomModel : confRoomRepository.findAll()) {
+            if (roomModel.getName().toLowerCase().equals(name.toLowerCase())) {
+                confRoomModel.add(roomModel);
+            }
         }
-        return confRooms;
-    }*/
-
-    @Transactional
-    public void saveConfRoom(ConfRoom confRoom){
-        ConfRoomModel confRoomModel = ConfRoomModel.builder()
-                .floor(confRoom.getFloor())
-                .name(confRoom.getName())
-                .hdmi(confRoom.isHdmi())
-                .skypeVc(confRoom.isSkypeVc())
-                .lan(confRoom.isLan())
-                .labels(confRoom.isLabels())
-                .remotes(confRoom.isRemotes())
-                .instruction(confRoom.isInstruction())
-                .comments(confRoom.getComments())
-                .build();
-        confRoomRepository.save(confRoomModel);
-    }
-
-    @Transactional
-    public void deleteConfRoom(int id) {
-        confRoomRepository.deleteById(id);
-    }
-
-    @Transactional
-    public Optional<ConfRoom> getConfRoom(int id) {
-        Optional<ConfRoomModel> byId = confRoomRepository.findById(id);
-        return byId.map(conf->ConfRoom.builder()
-                .floor(conf.getFloor())
-                .name(conf.getName())
-                .hdmi(conf.isHdmi())
-                .skypeVc(conf.isSkypeVc())
-                .lan(conf.isLan())
-                .labels(conf.isLabels())
-                .remotes(conf.isRemotes())
-                .instruction(conf.isInstruction())
-                .comments(conf.getComments())
-                .build());
+        return confRoomModel;
     }
 }

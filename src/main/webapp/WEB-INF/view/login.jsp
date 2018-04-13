@@ -1,38 +1,41 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: pawel
+  Date: 22/03/2018
+  Time: 01:54
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Example</title>
+    <title>Login page</title>
+    <h2>Login page</h2>
+<style>
+    .failed{
+        color:red;
+    }
+
+</style>
 </head>
 <body>
-<form method="post" action="login">
-    <center>
-        <table border="1" width="30%" cellpadding="3">
-            <thead>
-            <tr>
-                <th colspan="2">Login Here</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>User Name</td>
-                <td><input type="text" name="uname" value="" /></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="pass" value="" /></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Login" /></td>
-                <td><input type="reset" value="Reset" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">Yet Not Registered!! <a href="reg.jsp">Register Here</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </center>
-</form>
+    <form:form action="${pageContext.request.contextPath}/authenticateTheUser" method="post">
+        <c:if test="${param.error != null}">
+
+            <i class="failed">Sorry! You entered invalid username/password.</i>
+        </c:if>
+
+        <p>
+            User name: <input type="text" name = "username" />
+        </p>
+        <p>
+            Password: <input type="text" name = "password" />
+        </p>
+        <input type="submit" value="Login"/>
+    </form:form>
+
 </body>
 </html>

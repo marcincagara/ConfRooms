@@ -9,8 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import javax.sql.DataSource;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -20,10 +21,10 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-/*    @Bean
-    public CommandLineRunner commandLineRunner(UserRepository userRepository, ConfRoomRepository confRoomRepository){
-        return (String ... args)->{
-            User  user = new User();
+    /*@Bean
+    public CommandLineRunner commandLineRunner(UserRepository userRepository, ConfRoomRepository confRoomRepository) {
+        return (String... args) -> {
+            User user = new User();
             user.setUserName("admin");
             user.setPassword("admin");
 
@@ -33,7 +34,8 @@ public class Application {
             UserRole userRole = new UserRole();
             userRole.setRole("ROLE_USER");
 
-            user.setUserRoles(Arrays.asList(adminRole,userRole));
+            //user.setUserRoles(Arrays.asList(adminRole, userRole));
+            user.setUserRoles(Arrays.asList(adminRole));
 
             userRepository.save(user);
 

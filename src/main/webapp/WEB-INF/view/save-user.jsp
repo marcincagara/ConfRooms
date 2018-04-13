@@ -22,23 +22,33 @@
     <form:form action="saveUser" modelAttribute="user" method="POST">
 
         <!-- need to associate this data with customer id -->
-        <form:hidden path="id"/>
+        <form:hidden path="userId"/>
         <table>
             <tbody>
             <tr>
                 <td><label>Login:</label></td>
-                <td><form:input path="login"/></td>
+                <td><form:input path="userName"/></td>
+                    <form:errors path="userName" cssClass="error"/>
 
             </tr>
             <tr>
                 <td><label>Password:</label></td>
                 <td><form:input path="password"/></td>
+                <form:errors path="password" cssClass="error"/>
             </tr>
             <tr>
                 <td><label>Email:</label></td>
                 <td><form:input path="email"/></td>
+                <form:errors path="email" cssClass="error"/>
             </tr>
-
+            <tr>
+                <td><label>User Roles:</label></td>
+                <td><form:input path="userRoles"/></td>
+            </tr>
+            <tr>
+                <td><label>enabled:</label></td>
+                <td><form:input path="enabled"/></td>
+            </tr>
             <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save"></td>
@@ -49,7 +59,7 @@
 
     <div style="clear: both;"></div>
     <p>
-        <a href="${pageContext.request.contextPath}/conf/showUser">Back to List</a>
+        <a href="${pageContext.request.contextPath}/admin/showUser">Back to List</a>
     </p>
 </div>
 </body>

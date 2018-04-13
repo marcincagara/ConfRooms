@@ -1,5 +1,4 @@
-package hello.configration;
-
+package hello.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,43 +12,41 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-@EnableWebSecurity
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthenticationProvider authenticationProvider;
 
     @Autowired
-    public WebSecurityConfig(AuthenticationProvider authenticationProvider) {
+    public DemoSecurityConfig(AuthenticationProvider authenticationProvider) {
         this.authenticationProvider = authenticationProvider;
     }
 
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider);
-    }
-
+@Autowired
+public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+    auth.authenticationProvider(authenticationProvider);
+}
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").access("hasRole('ROLE_ADMIN')")
-                .anyRequest()
-                .permitAll()
-                .and().formLogin()
+                .antMatchers("/admin/**")
+                .hasAnyRole("ADMIN")
+                .antMatchers("/conf/**")
+                .hasAnyRole("ADMIN","USER")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
                 .loginPage("/login")
+                .loginProcessingUrl("/authenticateTheUser")
                 .permitAll()
                 .and()
-                .formLogin().loginPage("/home")
-                .usernameParameter("username").passwordParameter("password")
+                .logout().permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/login?logout")
-                .and()
-                .exceptionHandling().accessDeniedPage("/403")
-                .and()
-                .csrf();
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied");
     }
-
 
     @Bean(name = "passwordEncoder")
     public PasswordEncoder passwordencoder() {
